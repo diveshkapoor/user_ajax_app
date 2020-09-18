@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        table {
+            border-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{% url 'add value' %}">Add value</a>
+    <table>
+        <th>Patient Name</th>
+        <th>Date of Birth</th>
+        <th>Action</th>
+        {%  for obj in result %}
+        <tr>
+            <td>{{obj.first_name}}</td>
+            <td>{{obj.dob}}</td>
+            <td><a href="{% url 'detail_view' obj.pk %}">View</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
