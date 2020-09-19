@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect , get_object_or_404
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 from app1.models import Person
 from app1.forms import UserForm
 from django.views.generic import ListView
@@ -47,18 +49,18 @@ def get_user_all(request):
     return render(request, 'app1/view.html', {"result" : user_obj})
 
 def user_delete(request, pk):
-    user = get_object_or_404(user, pk=pk)
+    user = get_object_or_404(Person, pk=pk)
     data = dict()
     if request.method == 'POST':
         user.delete()
         data['form_is_valid'] = True  # This is just to play along with the existing code
         users = user.objects.all()
-        data['html_user_list'] = render_to_string('users/includes/partial_user_list.html', {
+        data['html_user_list'] = render_to_string('partial_user_list.html', {
             'users': users
         })
     else:
         context = {'user': user}
-        data['html_form'] = render_to_string('users/includes/partial_user_delete.html',
+        data['html_form'] = render_to_string('partial_user_delete.html',
             context,
             request=request,
         )

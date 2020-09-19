@@ -1,0 +1,22 @@
+{% for obj in users %}
+  <tr>
+    <td>{{ obj.first_name }}</td>
+    <td>{{ obj.dob }}</td>
+    <td>
+      <button type="button"
+              class="btn btn-warning btn-sm js-update-User"
+              data-url="{% url 'User_update' User.id %}">
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+      </button>
+      <button type="button"
+              class="btn btn-danger btn-sm js-delete-User"
+              data-url="{% url 'User_delete' User.id %}">
+        <span class="glyphicon glyphicon-trash"></span> Delete
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="8" class="text-center bg-warning">No User</td>
+  </tr>
+{% endfor %}
